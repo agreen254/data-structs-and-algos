@@ -121,8 +121,183 @@ public class LinkedList {
         // [10 -> 20 -> 30] before reversal
         // [10 <- 20 <- 30] after reversal
         // doesn't return a new list; reverses this list in place
-        var three = first;
-        first = last;
-        last = three;
+        if (size == 0 || size == 1) return;
+        else if (size == 2) {
+            var three = first;
+            first = last;
+            last = three;
+            first.next = last;
+            last.next = null;
+        }
+        else {
+            // working case for three items
+//            var three = first;
+//            var second = first.next;
+//
+//            first = last;
+//            last = three;
+//
+//            first.next = second;
+//            second.next = last;
+//
+//            last.next = null;
+
+
+//            var swapper = first;
+//            var second = first.next;
+//            var third = second.next;
+//            var fourth = third.next;
+//            var fifth = fourth.next;
+//
+//            first = last;
+//            last = swapper;
+//
+//            first.next = fifth;
+//            fifth.next = fourth;
+//            fourth.next = third;
+//            third.next = second;
+//
+//            second.next = last;
+//            last.next = null;
+
+            var nodes = new Node[size];
+            var current = first;
+            nodes[0] = current;
+            for (int i = 1; i < size - 1; i++) {
+                nodes[i] = current.next;
+                current = current.next;
+            }
+            nodes[size - 1] = last;
+
+            var swapper = first;
+            first = last;
+            last = swapper;
+            last.next = null;
+            var c = first;
+            for (int i = 0, j = size - 1; j >= 0; i++, j--) {
+                c.next = nodes[j];
+                c = nodes[j];
+            }
+            // SUCCESS!
+        }
+    }
+
+    public void reverseSoln() {
+        // [10 -> 20 -> 30]
+        //  p     c     n
+        //  next = c.next
+        //  c.next = p
+        // [10 <- 20    30]
+        //        p     c     n
+        // [10 <- 20 <- 30]
+        //              p     c
+        // stop here, when c references nothing
+        if (isEmpty()) return;
+
+        var previous = first;
+        var current = first.next;
+        while (current != null) {
+            var next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+
+        last = first;
+        last.next = null;
+        first = previous;
+    }
+
+    public int kFromEndFirst(int k) {
+        // if the item is the final element, return 1
+        if (k <= 0 || k > size) throw new IllegalArgumentException();
+        if (k == 1) return last.value;
+        if (k == size) return first.value;
+
+        int i = 0;
+        var current = first;
+        while (current.next != null) {
+            if (size - i++ == k) return current.value;
+            current = current.next;
+        }
+        return -1;
+    }
+
+    public int kFromEndSecond(int k) {
+        if (k <= 0 || k > size) throw new IllegalArgumentException();
+        if (k == 1) return last.value;
+        if (k == size) return first.value;
+
+        // using two pointers is a powerful technique for linked list problems
+        var pOne = first;
+        var pTwo = first;
+        for (int i = 0; i < k - 1; i++) pTwo = pTwo.next;
+        while (pTwo.next != null) {
+            pTwo = pTwo.next;
+            pOne = pOne.next;
+        }
+        return pOne.value;
+    }
+
+    public int kFromEndSoln(int k) {
+        // if (k > size) throw new IllegalArgumentException();
+        // but sometimes we don't know size of linked list
+        // don't worry about error checking if k <= 0
+        if (isEmpty()) throw new IllegalStateException();
+
+        var a = first;
+        var b = first;
+        for (int i = 0; i < k - 1; i++) {
+            b = b.next;
+            if (b == null) throw new IllegalArgumentException();
+        }
+        while (b != last) {
+            a = a.next;
+            b = b.next;
+        }
+        return a.value;
+    }
+
+    public void printMiddle() {
+        var a = first;
+        var b = first;
+        while (true) {
+            b = b.next;
+            if (b == null) {
+                System.out.println(a.value);
+                break;
+            }
+            b = b.next;
+            if (b == null) {
+                System.out.println(a.value);
+                System.out.println(a.next.value);
+                break;
+            }
+            a = a.next;
+        }
+    }
+
+    public void printMiddleSoln() {
+        if (isEmpty()) throw new IllegalArgumentException();
+
+        var a = first;
+        var b = first;
+        while (b != last && b.next != last) {
+            b = b.next.next;
+            a = a.next;
+        }
+        if (b == last) System.out.println(a.value);
+        else System.out.println(a.value + ", " + a.next.value);
+    }
+
+    public boolean checkForLoop() {
+        var a = first;
+        var b = first;
+        while (b != null) {
+            if (a == b.next || a == b.next.next) return true;
+            a = a.next;
+            b = b.next.next;
+        }
+        return false;
     }
 }
