@@ -1,0 +1,31 @@
+QUEUES
+- Data structure similar to a stack, except the first item inserted is the first item removed
+- FIFO (First In, Last Out)
+- Stacks are LIFO (Last In, First Out)
+- Like a cafeteria line in the real world
+- Applications:
+    - you have a resource which must be shared among many consumers
+    - printer jobs
+    - operating systems (to manage process running)
+    - web servers (to manage incoming requests)
+    - live support systems
+
+- Supported Operations (all are implemented in the Queue interface)
+    - enqueue (implemented as add() and offer() in Java. If the queue is full, add() will throw an exception and offer() will not)
+    - dequeue (poll() and remove() ; remove() will throw an exception if called on an empty object and poll() will not)
+    - peek (peek() and element() ; peek() returns null if the queue is empty, but element() will throw an exception)
+    - isEmpty
+    - isFull
+    - ALL are O(1) because items are only added/removed from the end
+
+- In Java, the java.util.Queue is just an Interface and doesn't have a full implementation
+- 90% of the time you will use the ArrayDeque or the LinkedList
+- That's right, a LinkedList uses the Queue Interface!
+- ArrayDeque:
+    - short for Double Ended Que
+    - it has two ends
+    - you can add items from any direction
+    - internally, this class uses a resizable array to store the items
+
+- There are three ways to implement a queue:
+    - store the items in an array, a linked list, or a stack

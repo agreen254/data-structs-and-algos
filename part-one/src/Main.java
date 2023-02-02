@@ -1,6 +1,8 @@
-import stack.StackLinkedList;
+import queue.ArrayQueueShift;
 import stackSoln.StringReverser;
-import java.util.HashMap;
+
+import java.util.Queue;
+import java.util.ArrayDeque;
 //import java.util.Stack;
 
 public class Main {
@@ -73,5 +75,49 @@ public class Main {
         System.out.println(minStack.getMin());
         minStack.push(-5);
         System.out.println(minStack.getMin());
+
+        System.out.println("Queues");
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.add(10);
+        queue.add(20);
+        queue.add(30);
+        queue.add(8);
+        System.out.println(queue);
+        var queueReverser = new queue.Reverse();
+        queueReverser.reverse(queue);
+        System.out.println(queue);
+
+        System.out.println("My Array Queue");
+        var q = new ArrayQueueShift(3);
+        q.enqueue(5);
+        q.enqueue(3);
+        q.enqueue(2);
+        System.out.println(q.peek());
+        q.dequeue();
+        q.enqueue(10);
+        System.out.println(q.isFull());
+        q.dequeue();
+        System.out.println(q.peek());
+
+
+        System.out.println("My Array Queue with Pointers");
+        var qp = new queue.ArrayQueuePointers(3);
+        qp.enqueue(5);
+        qp.enqueue(3);
+        qp.enqueue(1);
+        var out = qp.dequeue();
+        System.out.println(out);
+        System.out.println(qp.peek());
+        qp.enqueue(12);
+        qp.dequeue();
+        out = qp.dequeue();
+        System.out.println(out);
+        System.out.println(qp.peek());
+        qp.enqueue(6);
+        qp.enqueue(8);
+        System.out.println(qp.isFull());
+
+
+
     }
 }
