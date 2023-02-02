@@ -1,0 +1,32 @@
+STACKS
+- Many uses such as
+    - implementing the undo feature
+    - building compilers (e.g. syntax checking)
+    - evaluate arithmetic expressions (e.g. calculator, 1 + 2 * 3)
+    - build navigation (forward/back)
+
+- Stacks are like a stack of books
+    - we can stack a bunch of books on top of each other
+    - but we can only read or remove the top book from the stack
+    - getting to the bottom book requires removing all of the books one by one
+
+- LIFO (Last In First Out) Principle
+    - suppose each item in the stack represents an action that a user performed in a text editor
+    - to undo these actions we start with the most recent action
+    - we take this action out of the stack and call one of its methods to undo that action
+
+- Internally, we use an array or a linked list to store the objects in a stack
+- A stack is basically a wrapper around an array or a linked list that gives us a different way of storing and accessing objects
+
+- OPERATIONS
+    - push(item): Adds an item on top of the stack
+    - pop(): Removes most recent item
+    - peek(): Returns top item without removing it from the stack
+    - isEmpty(): Tells us if the stack is empty or not
+    - notice the absence of lookup methods
+
+    - peek: O(1)
+    - isEmpty: O(1)
+    - push: O(1)
+    - pop: O(1)
+
