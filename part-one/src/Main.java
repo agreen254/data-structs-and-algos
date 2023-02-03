@@ -1,5 +1,7 @@
 import queue.ArrayQueueShift;
 import stackSoln.StringReverser;
+import queue.QueueFromStacks;
+import queue.PriorityQueueArray;
 
 import java.util.Queue;
 import java.util.ArrayDeque;
@@ -117,7 +119,48 @@ public class Main {
         qp.enqueue(8);
         System.out.println(qp.isFull());
 
+        System.out.println("Queue from two stacks");
+        var qfs = new QueueFromStacks();
+        qfs.enqueue(5);
+        qfs.enqueue(3);
+        qfs.enqueue(1);
+        qfs.dequeue();
+        System.out.println(qfs.stackString());
+        System.out.println(qfs.queueString());
+        System.out.println(qfs.peek());
+        qfs.enqueue(6);
+        qfs.enqueue(2);
+        qfs.enqueue(4);
+        System.out.println(qfs.peek());
+        qfs.dequeue();
+        System.out.println(qfs.peek());
+        qfs.dequeue();
+        System.out.println(qfs.peek());
 
+        System.out.println("Priority Queue Array");
+        var pqa = new PriorityQueueArray(3);
+        pqa.insert(6);
+        System.out.println(pqa);
+        pqa.insert(8);
+        System.out.println(pqa);
+        pqa.insert(1);
+        System.out.println(pqa);
+        pqa.remove();
+        System.out.println(pqa);
+        System.out.println(pqa.peek());
+        pqa.remove();
+        System.out.println(pqa.peek());
+        System.out.println(pqa.isFull());
+        pqa.remove();
+        System.out.println(pqa.empty());
 
+        System.out.println("Priority Queue Solution");
+        var pq = new queue.PriorityQueueArraySolution(5);
+        pq.add(5);
+        pq.add(3);
+        pq.add(6);
+        pq.add(1);
+        pq.add(4);
+        System.out.println(pq);
     }
 }

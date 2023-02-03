@@ -29,3 +29,9 @@ QUEUES
 
 - There are three ways to implement a queue:
     - store the items in an array, a linked list, or a stack
+
+- If you make a queue from two stacks, enqueue is O(1) but dequeue and peek can be O(n) if you need to pop the entire first queue
+
+- Priority Queues
+    - tasks are completed based on their priority, not on when they were added to the queue
+    - two ways to implement: Arrays and Heap
