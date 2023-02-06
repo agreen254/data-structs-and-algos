@@ -2,9 +2,11 @@ import queue.ArrayQueueShift;
 import stackSoln.StringReverser;
 import queue.QueueFromStacks;
 import queue.PriorityQueueArray;
+import queue.QueueFromLinkedList;
 
 import java.util.Queue;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 //import java.util.Stack;
 
 public class Main {
@@ -162,5 +164,23 @@ public class Main {
         pq.add(1);
         pq.add(4);
         System.out.println(pq);
+
+        System.out.println("Queue Kth Reverser");
+        int[] qq = { 10, 20, 30, 40, 50};
+        System.out.println(Arrays.toString(qq));
+
+        System.out.println("Queue from linked list");
+        var qll = new queue.QueueFromLinkedList();
+        System.out.println(qll.empty());
+        qll.enqueue(10);
+        qll.enqueue(20);
+        qll.enqueue(30);
+        qll.enqueue(40);
+        qll.enqueue(50);
+        System.out.println(qll.peek());
+        qll.dequeue();
+        System.out.println(qll.peek());
+        qll.enqueue(12);
+
     }
 }

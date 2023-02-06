@@ -44,6 +44,14 @@ public class LinkedList {
         size++;
     }
 
+    public int getFirst() {
+        return first.value;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
     // create private method to see if the list is empty or not
     private boolean isEmpty() {
         return first == null;
