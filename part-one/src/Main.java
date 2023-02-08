@@ -1,8 +1,8 @@
+import hashTable.FirstRepeatCharHashMap;
 import queue.ArrayQueueShift;
 import stackSoln.StringReverser;
 import queue.QueueFromStacks;
 import queue.PriorityQueueArray;
-import queue.QueueFromLinkedList;
 
 import java.util.Queue;
 import java.util.ArrayDeque;
@@ -181,6 +181,25 @@ public class Main {
         qll.dequeue();
         System.out.println(qll.peek());
         qll.enqueue(12);
+
+        System.out.println("Stack From Queues");
+        var sfq = new stack.StackFromQueues();
+        sfq.push(10);
+        sfq.push(20);
+        sfq.push(30);
+        sfq.push(40);
+        sfq.push(50);
+        System.out.println(sfq.size());
+        System.out.println(sfq.peek());
+
+        System.out.println("Hash Tables");
+        System.out.println("First Repeat Char");
+        var frc = new FirstRepeatCharHashMap();
+        String phrase = "The quick brown fox jumped over the lazy dog";
+        char rep = frc.firstRepeat(phrase);
+        System.out.println(rep);
+
+        System.out.println("Custom Hash Table");
 
     }
 }

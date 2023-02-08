@@ -1,0 +1,133 @@
+Hash Tables
+- Java has a map interface
+- Most common implementing class is HashMap
+- Hashtable is considered legacy
+- ConcurrentHashMap is used in multi-threaded applications
+- We need a Key, Value pair
+
+- Key: Employee Number (Integer)
+- Value: Name (String)
+
+Map<Integer, String> map = new HashMap<>();
+map.put(1, "Aaron");  // adds key, value pair
+
+- If we insert the same key but a different value, the previous value is overridden
+- There are no duplicate keys
+- We can have the key OR value be null, too
+
+map.put(null, null);  // perfectly valid hashmap
+map.remove(null);
+map.get(1);  // returns "Aaron"
+map.containsKey(3);  // O(1)
+map.containsValue(3);  // has a higher time complexity than containsKey O(n) because we have to iterate
+
+- Iterating
+for (var item : map.entrySet())  // returns a list of key,value pairs
+for (var item : map.keySet())  // returns list of keys
+
+- The item returned when using the entrySet iteration has several properties
+item.getValue();
+item.getKey();
+item.setValue();
+
+
+
+Sets
+- Maps: k --> v
+- Sets: k
+- So sets only have keys; they do not allow duplicate keys!
+- The Set interface has several implementations; mainly, we use the HashSet
+HashSet<Integer> set = new HashSet<>();
+int[] numbers = { 1, 2, 3, 3, 2, 1, 4 };
+for (var number : numbers) set.add(number);
+
+- we have several methods
+set.remove(item)
+set.removeAll()
+set.contains(item)
+set.size()
+set.clear()
+
+
+
+Hash Functions
+- When we insert a kv pair into a hash table, the hash function will use the key to figure out where to store the value
+- Technically we store the values in an array
+- A hash function is a function that gets a value and maps it to a different value called a hash-value, hash-code, digest, or just hash
+- In the context of data structures, a hash function maps a key value to an index value
+- For example, if we have 100 employees but use a six-digit ID number we don't want an array of length 100_000
+- We want to take an ID number and figure out where to put it in an array of size 100
+- A very simple implementation would be to use the modulus operator
+int size = 100;
+public static int hash(int number) {
+    return number % size;
+}
+hash(123456);
+
+- If we change ID format to a string, e.g. 123456-A, we can get the sum of the numeric representation of each character and then take the modulus of that
+public static int hash(String key) {
+    int hash = 0;
+    for (var ch : key.toCharArray()) hash += ch;
+    return hash % size;
+}
+
+- Actually, in Java every String has a method called hashCode() which will convert the string into a hash value
+- In fact, every object has this
+
+
+
+Collisions
+- It is possible that two distinct keys generate the same hash value
+- One way to fix this problem is to have each cell in the hash array point to a linked list
+- So we won't store the values in the array itself, but in the linked list
+- If we have a collision, then, we add the new item to the end of the linked list
+- This approach is called Chaining
+
+- Another solution is to find a different slot for storing the second value
+- We call this Open Addressing, and there are several algorithms for it
+
+
+
+Chaining
+- We have a hash table array of five cells for storing items
+- We refer to the cells as buckets/slots
+- Initially, all of our buckets are null
+- Now we want to store a kv pair <6, A> in our hash table
+- We use a modulus hash function that returns 6 % 5 = 1, so we store the key at index 1
+- But we're not going to store the value directly in the cell; we will wrap it in a linked list node and have the cell at index 1 point to the node
+- Say we add the kv pair <11, C> now
+- 11 % 5 is also = 1
+- So we go to the cell at index 1 and store the value at the end of the linked list
+- With this approach we no longer have collisions and the linked lists can grow or shrink automatically
+
+
+
+Open Addressing - Linear Probing
+- With open addressing we don't store values in linked lists, we store them directly in slots (in our hash array)
+- For the same conflict as in our chaining example, we have to look for another empty slot in the array itself
+- This process is called probing
+- This is also why the technique is called open addressing; the locations are not purely determined by the hash function
+- One probing algorithm is linear probing
+- Using linear probing we start with the current slot, and if it's full we go to the next slot, et cetera
+- If we can't find any empty slots it means our table is full
+- This is one of the drawbacks of the open addressing strategy; using chaining we do not have this problem
+- (hash(key) + i) % table_size
+- A drawback of the linear probing method is that it forms clusters; if we have a large cluster our probing will take longer
+
+
+
+Open Addressing - Quadratic Probing
+- To solve the performance issues caused by linear clusters we can implement quadratic probing
+- Instead of (hash(key) + i) % table_size we have (hash(key) + i^2) % table_size
+- A drawback of quadratic probing is that we may end up in an infinite loop because the algo generates the same steps
+
+
+
+Open Addressing - Double Hashing
+- Double hashing lets us prevent the possibility of infinite loops present in quadratic probing
+- Instead of i or i^2 we use a separate, independent hash function to calculate the number of steps
+- A popular example of a second hash function is
+hash2(key) = prime - (key % prime)
+- where prime is a prime number smaller than the size of our hash table
+- So to calculate the index using our double hashing algorithm we would do
+(hash1(key) + i * hash2(key)) % table_size

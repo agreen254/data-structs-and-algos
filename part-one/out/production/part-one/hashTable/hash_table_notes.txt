@@ -1,0 +1,31 @@
+Hash Tables
+- Java has a map interface
+- Most common implementing class is HashMap
+- Hashtable is considered legacy
+- ConcurrentHashMap is used in multi-threaded applications
+- We need a Key, Value pair
+
+- Key: Employee Number (Integer)
+- Value: Name (String)
+
+Map<Integer, String> map = new HashMap<>();
+map.put(1, "Aaron");  // adds key, value pair
+
+- If we insert the same key but a different value, the previous value is overridden
+- There are no duplicate keys
+- We can have the key OR value be null, too
+
+map.put(null, null);  // perfectly valid hashmap
+map.remove(null);
+map.get(1);  // returns "Aaron"
+map.containsKey(3);  // O(1)
+map.containsValue(3);  // has a higher time complexity than containsKey O(n) because we have to iterate
+
+- Iterating
+for (var item : map.entrySet())  // returns a list of key,value pairs
+for (var item : map.keySet())  // returns list of keys
+
+- The item returned when using the entrySet iteration has several properties
+item.getValue();
+item.getKey();
+item.setValue();
