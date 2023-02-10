@@ -1,3 +1,5 @@
+import hashTable.CustomHashTable;
+import hashTable.CustomEntry;
 import hashTable.FirstRepeatCharHashMap;
 import queue.ArrayQueueShift;
 import stackSoln.StringReverser;
@@ -7,6 +9,7 @@ import queue.PriorityQueueArray;
 import java.util.Queue;
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.LinkedList;
 //import java.util.Stack;
 
 public class Main {
@@ -200,6 +203,20 @@ public class Main {
         System.out.println(rep);
 
         System.out.println("Custom Hash Table");
-
+        var map = new CustomHashTable();
+        var entry1 = new CustomEntry(1, "hello");
+        var entry2 = new CustomEntry(2, "hey");
+        var entry3 = new CustomEntry(3, "what's up");
+        var entry4 = new CustomEntry(4, "greetings");
+        map.put(entry1);
+        map.put(entry2);
+        map.put(entry3);
+        map.put(entry4);
+        System.out.println(map.get(2));
+        map.remove(2);
+        map.put(new CustomEntry(2, "Added Back"));
+        map.put(new CustomEntry(8, "ahasdh"));
+        System.out.println(map.get(2));
+        System.out.println(map.get(8));
     }
 }
