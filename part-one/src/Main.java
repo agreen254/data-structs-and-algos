@@ -1,10 +1,15 @@
+import hashTable.CountPairsWithDiff;
 import hashTable.CustomHashTable;
 import hashTable.CustomEntry;
 import hashTable.FirstRepeatCharHashMap;
-import queue.ArrayQueueShift;
+import hashTable.LinProbe;
+import hashTable.MostFrequent;
+import hashTable.TwoSum;
+
 import stackSoln.StringReverser;
-import queue.QueueFromStacks;
+import queue.ArrayQueueShift;
 import queue.PriorityQueueArray;
+import queue.QueueFromStacks;
 
 import java.util.Queue;
 import java.util.ArrayDeque;
@@ -218,5 +223,30 @@ public class Main {
         map.put(new CustomEntry(8, "ahasdh"));
         System.out.println(map.get(2));
         System.out.println(map.get(8));
+
+        System.out.println("Most Frequent");
+        var mostFreq = new MostFrequent();
+        System.out.println(mostFreq.mostFrequent(new int[] { 1, 2, 3, 4, 5, 5, 6, 5, 4, 3, 2, 2, 2 }));
+
+        System.out.println("Count Pairs with Diff");
+        var diff = new hashTable.CountPairsWithDiff();
+        System.out.println(diff.countPairsWithDiff(new int[] {1, 7, 5, 9, 2, 12, 3}, 2));
+
+        System.out.println("Two Sum");
+        var ts = new hashTable.TwoSum();
+        var twoSum = ts.twoSum(new int[] { 2, 7, 11, 15 }, 9);
+        System.out.println(Arrays.toString(twoSum));
+
+        System.out.println("Linear Probing Hash Table");
+        var lp = new hashTable.LinProbe(5);
+        lp.put(1, "hello");
+        lp.put(6, "hi");
+        lp.put(11, "hahahahaha");
+        System.out.println(lp.get(1));
+        System.out.println(lp.get(6));
+        System.out.println(lp.get(11));
+        lp.remove(11);
+        lp.put(3, "hmmm");
+        System.out.println(lp.get(3));
     }
 }
