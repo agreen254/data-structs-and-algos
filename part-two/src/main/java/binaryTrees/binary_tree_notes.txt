@@ -1,0 +1,70 @@
+Binary Trees
+- A tree is a data structure that stores elements in a hierarchy
+    - each node contains some data, e.g. a Person object
+    - we refer to the elements as 'nodes' and the lines that connect them as 'edges'
+    - the top node of the tree is called the 'root'
+    - nodes can have both a parent node and children nodes
+    - nodes at the very bottom of the tree with no children are called 'leaf'
+
+- When each node only has a max of two children it is called a 'Binary Tree'
+
+- We use trees whenever we want to represent hierarchical data
+- Database management tools also use trees for indexing data
+- Autocompletion engines use trees too
+- Also compilers -- they use a special kind of tree called a "syntax tree" to parse expression
+- And compression algorithms such as those used in JPEG and MP3
+
+- In a binary search tree, the value of any node is always greater than that of its left child and less than that of its right child
+- Every node in the left sub-tree is smaller than the root
+- Every node in the right sub-tree is larger than the root
+- Binary search trees follow Logarithmic Time Complexity for lookups; i.e. O(log n)
+    - for additions: O(log n) -- we just have to find a node, which is O(log n), then set the link O(1)
+    - for deletions: O(log n) -- we look it up then remove it by deleting its edges
+
+- Traversing Trees
+    - in linear data structures such as arrays and linked lists we only have one way to traverse our data
+    - i.e. starting at one end and going until we hit the end
+    - but trees are non-linear structures; in a binary tree we have two possible directions to go
+
+- Categories of Traversal
+   # Sample Tree:
+
+              ---- 7 ----
+             /           \
+             4            9
+          /     \      /     \
+         1       6    8       10
+
+    - breadth first (aka level order): we visit all nodes at the same level before going to the next level
+        - 7, 4, 9, 1, 6, 8, 10
+    - depth first: Pre-order, In-order, Post-order
+        - pre-order: visit the root first, followed by left sub-tree, followed by right sub-tree
+            - 7, 4, 1, 6, 9, 8, 10
+        - in-order: visit the left sub-tree, then the root, then the right sub-tree
+            - 1, 4, 6, 7, 8, 9, 10
+            - note that they are in ascending order!
+            - if we wanted descending order we would visit right-root-left
+        - post-order: visit the left sub-tree, then right sub-tree, then root
+            - 1, 6, 4, 8, 10, 9, 7
+            - note we are traversing the tree from its leaves all the way up to its root
+
+- Recursion
+    - see binaryTrees.Recursion
+
+- Depth First Traversals
+    - we create a method with one parameter: the root of the tree we want to traverse
+    - when we want to visit the left or right node we recursively call that method
+
+- Depth and Height of Nodes
+    - depth: the number of edges to get to the target node
+    - in our example tree: 7 has a depth of zero, 6 has a depth of two, and 4 has a depth of one
+    - height: the opposite of depth
+    - leaf nodes have a height of zero
+    - we calculate the longest path from one of the leaf nodes to the target node
+    - in our example tree: 8 and 10 have a height of zero, 7 has a height of two, 9 has a height of one
+    - so we can implement a findHeight method using recursion
+    - we find the height of both the left and right sub-trees, then return the larger height and add one (because of root)
+    - so the formula is 1 + max(height(L), height(R))
+    - this uses the post-order traversal algorithm! we visit the leaves first and work our way up
+
+- Minimum Value in a Tree
