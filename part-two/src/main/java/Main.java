@@ -46,5 +46,11 @@ public class Main {
         for (var item : list) System.out.println("Array List Item: " + item);
         System.out.println("Level-Order Traverse");
         tree.traverseLevelOrder();
+        System.out.println("Binary Search");
+        int[] arr = { 1, 3, 5, 7, 9, 11, 13 };
+        var searcher = new BinSearch();
+        System.out.println(searcher.search(arr, 9));
+        System.out.println(searcher.searchRecurse(arr, 3, 0, arr.length -1));
+        System.out.println(searcher.searchRecurse(arr, 2, 0, arr.length -1));
     }
 }
