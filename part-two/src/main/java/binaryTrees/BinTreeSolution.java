@@ -1,5 +1,7 @@
 package binaryTrees;
 
+import java.util.ArrayList;
+
 public class BinTreeSolution {
     private class Node {
         private int value;
@@ -132,16 +134,105 @@ public class BinTreeSolution {
         return last.value;
     }
 
-    public boolean isEqual() {
-        // return isEqual(root);
-        return false;
+    public boolean isEqualMine() {
+        return isEqualMine(root, root);
     }
 
-    private boolean isEqual(Node root1, Node root2) {
-         return false;
+    private boolean isEqualMine(Node nodeOne, Node nodeTwo) {
+        if ((isLeaf(nodeOne) && !isLeaf(nodeTwo)) || (!isLeaf(nodeOne) && isLeaf(nodeTwo))) {
+            return false;
+        }
+
+        return ((nodeOne.value == nodeTwo.value) && (nodeOne.leftChild.value == nodeTwo.leftChild.value) && (nodeOne.rightChild.value == nodeTwo.rightChild.value));
     }
 
     private boolean isLeaf(Node node) {
         return node.leftChild == null && node.rightChild == null;
     }
+
+    public boolean equals(BinTreeSolution other) {
+        if (other == null) return false;
+        return equals(root, other.root);
+        // method has access to the private field root because its in the class!!!
+    }
+
+    private boolean equals(Node first, Node second) {
+        if (first == null && second == null) return true;
+        if (first != null && second != null) {
+            return first.value == second.value
+                    && equals(first.leftChild, second.leftChild)
+                    && equals(first.rightChild, second.rightChild);
+        }
+        return false;
+    }
+
+    public boolean validateMine() {
+        return validateMine(root, -100_000, 100_000);
+    }
+
+    private boolean validateMine(Node node, int min, int max) {
+        // I think it worked ??!!
+        if (node == null) return true;
+
+        return (node.value > min) && (node.value < max)
+                && validateMine(node.leftChild, min, node.value)
+                && validateMine(node.rightChild, node.value, max);
+    }
+
+    public boolean isBinarySearchTree() {
+        return isBinarySearchTree(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean isBinarySearchTree(Node root, int min, int max) {
+        if (root == null) return true;
+
+        if (root.value < min || root.value > max) return false;
+
+        return isBinarySearchTree(root.leftChild, min, root.value - 1)
+                && isBinarySearchTree(root.rightChild, root.value + 1, max);
+
+    }
+
+    public void swapRoot() {
+        var temp = root.leftChild;
+        root.leftChild = root.rightChild;
+        root.rightChild = temp;
+    }
+
+    public void distanceK(int distance) {
+        distanceK(root, distance);
+    }
+
+    private void distanceK(Node root, int distance) {
+        // this one worked too!!
+        if (root == null) return;
+        if (distance == 0) System.out.println(root.value);
+        distance -= 1;
+        distanceK(root.leftChild, distance);
+        distanceK(root.rightChild, distance);
+    }
+
+    public ArrayList<Integer> getNodesAtDistance(int distance) {
+        var list = new ArrayList<Integer>();
+        getNodesAtDistance(root, distance, list);
+        return list;
+    }
+
+    private void getNodesAtDistance(Node root, int distance, ArrayList<Integer> list) {
+        if (root == null) return;
+        if (distance == 0) {
+            list.add(root.value);
+            return;
+        }
+
+        getNodesAtDistance(root.leftChild, distance - 1, list);
+        getNodesAtDistance(root.rightChild, distance - 1, list);
+    }
+
+    public void traverseLevelOrder() {
+        for (var i = 0; i <= height(); i++) {
+            for (var value : getNodesAtDistance(i)) System.out.println(value);
+        }
+    }
+
 }

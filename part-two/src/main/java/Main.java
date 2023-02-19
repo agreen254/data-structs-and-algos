@@ -1,4 +1,3 @@
-import binaryTrees.BuildBinTree;
 import binaryTrees.BinTreeSolution;
 
 public class Main {
@@ -25,5 +24,27 @@ public class Main {
         System.out.println("Tree Min");
         System.out.println(tree.min());
         System.out.println(tree.minBinarySearch());
+        System.out.println("Is Equal");
+        var treeTwo = new BinTreeSolution();
+        treeTwo.insert(7);
+        treeTwo.insert(4);
+        treeTwo.insert(9);
+        treeTwo.insert(1);
+        treeTwo.insert(6);
+        treeTwo.insert(8);
+        treeTwo.insert(10);
+        System.out.println(tree.equals(treeTwo));
+        System.out.println("Validating a Binary Tree");
+        System.out.println("Test with the swapRoot Method");
+        System.out.println(tree.validateMine());
+        System.out.println(tree.isBinarySearchTree());
+        System.out.println("Nodes at Distance K");
+        tree.distanceK(2);
+        tree.distanceK(1);
+        tree.distanceK(0);
+        var list = tree.getNodesAtDistance(1);
+        for (var item : list) System.out.println("Array List Item: " + item);
+        System.out.println("Level-Order Traverse");
+        tree.traverseLevelOrder();
     }
 }

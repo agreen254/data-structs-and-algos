@@ -67,4 +67,5 @@ Binary Trees
     - so the formula is 1 + max(height(L), height(R))
     - this uses the post-order traversal algorithm! we visit the leaves first and work our way up
 
-- Minimum Value in a Tree
+- Level Order Traversal
+    - we go level-by-level
