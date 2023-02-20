@@ -19,7 +19,7 @@ public class BinSearch {
     public int searchRecurse(int[] data, int target, int low, int high) {
         int middleIdx = (low + high) / 2;
         if (data[middleIdx] == target) return middleIdx;
-        if (low == high) return -1;
+        if (low >= high) return -1;
         if (target < data[middleIdx]) return searchRecurse(data, target, low, high - 1);
         else return searchRecurse(data, target, low + 1, high);
     }

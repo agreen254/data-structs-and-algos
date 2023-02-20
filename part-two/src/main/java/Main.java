@@ -52,5 +52,13 @@ public class Main {
         System.out.println(searcher.search(arr, 9));
         System.out.println(searcher.searchRecurse(arr, 3, 0, arr.length -1));
         System.out.println(searcher.searchRecurse(arr, 2, 0, arr.length -1));
+
+        // System.out.println("Multi-Thread");
+        // int numTrials = 3;
+        // for (int i = 0; i < numTrials; i++) {
+        //     var thread = new MultiThread(i + 1);
+        //     Thread myThread = new Thread(thread);
+        //     myThread.start();  // must invoke start() method to multi-thread. invoking run() will not.
+        // }
     }
 }
