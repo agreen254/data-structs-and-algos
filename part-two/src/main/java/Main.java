@@ -1,5 +1,7 @@
 import binaryTrees.BinTreeSolution;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Binary Tree Stuff");
@@ -60,5 +62,25 @@ public class Main {
         //     Thread myThread = new Thread(thread);
         //     myThread.start();  // must invoke start() method to multi-thread. invoking run() will not.
         // }
+
+        System.out.println("Binary Tree Size");
+        var data = new ArrayList<Integer>();
+        tree.size(data);
+        System.out.println(data.size());
+
+        System.out.println("Count Leaves");
+        System.out.println(tree.countLeaves());
+
+        System.out.println("Binary Tree Max Value");
+        System.out.println(tree.max());
+
+        System.out.println("Binary Tree Contains");
+        System.out.println(tree.contains(7));
+
+        System.out.println("Is Sibling");
+        System.out.println(tree.isSibling(4, 9));
+
+        System.out.println("Get Ancestors");
+        System.out.println(tree.getAncestors(6));
     }
 }

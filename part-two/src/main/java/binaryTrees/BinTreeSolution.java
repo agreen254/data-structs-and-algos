@@ -235,4 +235,157 @@ public class BinTreeSolution {
         }
     }
 
+    private ArrayList<Integer> eles = new ArrayList<>();
+    public void size(ArrayList<Integer> data) {
+        size(root, data);
+    }
+
+    private void size(Node root, ArrayList<Integer> data) {
+        if (root == null) return;
+        data.add(root.value);
+        size(root.leftChild, data);
+        size(root.rightChild, data);
+    }
+
+    public int sizeSolution() {
+        return sizeSolution(root);
+    }
+
+    private int sizeSolution(Node root) {
+        if (root == null) return 0;
+        if (isLeaf(root)) return 1;
+        return 1 + sizeSolution(root.leftChild) + sizeSolution(root.rightChild);
+    }
+
+    public int countLeaves() {
+        return countLeaves(root);
+    }
+
+    private int countLeaves(Node root) {
+        if (root == null) return 0;
+        if (!isLeaf(root)) return countLeaves(root.leftChild) + countLeaves(root.rightChild);
+        else return 1;
+    }
+
+    public int countLeavesSolution() {
+        return countLeavesSolution(root);
+    }
+
+    private int countLeavesSolution(Node root) {
+        if (root == null) return 0;
+        if (isLeaf(root)) return 1;
+        return countLeavesSolution(root.leftChild) + countLeavesSolution(root.rightChild);
+    }
+
+    public int max() {
+        return max(root);
+    }
+
+    private int max(Node root) {
+        if (isLeaf(root)) return root.value;
+
+        var left = max(root.leftChild);
+        var right = max(root.rightChild);
+        return Math.max(Math.max(left, right), root.value);
+    }
+
+    public boolean contains(int toFind) {
+        return contains(root, toFind);
+    }
+
+    private boolean contains(Node root, int toFind) {
+        if (root == null) return false;
+        if (root.value == toFind) return true;
+        return contains(root.leftChild, toFind) || contains(root.rightChild, toFind);
+    }
+
+    public boolean containsSolution(int value) {
+        return containsSolution(root, value);
+    }
+
+    private boolean containsSolution(Node root, int value) {
+        if (root == null) return false;
+        if (root.value == value) return true;
+
+        return contains(root.leftChild, value) || contains(root.rightChild, value);
+    }
+
+    public boolean isSibling(int a, int b) {
+        return isSibling(root, a, b);
+    }
+
+    private boolean isSibling(Node root, int a, int b) {
+        if (root.leftChild == null || root.rightChild == null) return false;
+        if ((root.leftChild.value == a && root.rightChild.value == b)
+                || (root.leftChild.value == b && root.rightChild.value == a)) return true;
+        return isSibling(root.leftChild, a, b) || isSibling(root.rightChild, a, b);
+    }
+
+    public boolean isSiblingSolution(int first, int second) {
+        return isSiblingSolution(root, first, second);
+    }
+
+    private boolean isSiblingSolution(Node root, int first, int second) {
+        if (root == null) return false;
+
+        var isSibling = false;
+        if (root.leftChild != null && root.rightChild != null) {
+            isSibling = (root.leftChild.value == first && root.rightChild.value == second) ||
+                    (root.rightChild.value == first && root.leftChild.value == second);
+        }
+
+        return isSibling
+                || isSiblingSolution(root.leftChild, first, second)
+                || isSiblingSolution(root.rightChild, first, second);
+    }
+
+    public ArrayList<Integer> getAncestors(int heir) {
+        var ancestors = new ArrayList<Integer>();
+        getAncestors(root, heir, ancestors);
+        return ancestors;
+    }
+
+    private void getAncestors(Node root, int heir, ArrayList<Integer> ancestors) {
+        if (root.rightChild == null || root.leftChild == null) return;
+
+        // NICE!!
+        if (heir < this.root.value) {
+            if (root.leftChild.value == heir) {
+                heir = root.value;
+            }
+            ancestors.add(root.value);
+            getAncestors(root.leftChild, heir, ancestors);
+        }
+        if (heir > this.root.value) {
+            if (root.rightChild.value == heir) {
+                heir = root.value;
+            }
+            ancestors.add(root.value);
+            getAncestors(root.rightChild, heir, ancestors);
+        }
+    }
+
+    public ArrayList<Integer> getAncestorsSolution(int value) {
+        var list = new ArrayList<Integer>();
+        getAncestorsSolution(root, value, list);
+        return list;
+    }
+
+    private boolean getAncestorsSolution(Node root, int value, ArrayList<Integer> list) {
+        // traverse the tree until we find the target value
+        // if we find the target value we return true without adding the current node
+        // to the list
+        if (root == null) return false;
+        if (root.value == value) return true;
+
+        // if we find the target value in the left or right sub-trees
+        // that means the current node is one of the ancestors
+        if (getAncestorsSolution(root.leftChild, value, list) ||
+        getAncestorsSolution(root.rightChild, value, list)) {
+            list.add(root.value);
+            return true;
+        }
+        return false;
+    }
+
 }
