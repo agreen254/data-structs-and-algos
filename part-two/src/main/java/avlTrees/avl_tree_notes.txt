@@ -1,0 +1,81 @@
+AVL Trees
+Balanced vs Unbalanced
+- Binary tree operations are only O(log n) if the tree is balanced
+- By balanced, we mean that height(left) - height(right) <= 1
+- A perfect tree is a tree where everything but the leaves is full of nodes
+- Can also have right skewed/left skewed trees
+- We need to have trees that balance themselves to avoid skewing
+- Self-balancing trees include:
+    - AVL Trees (Adelson-Velsky and Landis)
+    - Red-black Trees
+    - B-Trees
+    - Splay-Trees
+    - 2-3 Trees
+
+- If the height difference in an AVL tree is greater than one following an insertion, then the tree will re-balance itself using something called rotation.
+- Four types of rotations:
+    - Left (LL)
+    - Right (RR)
+    - Left-Right (LR)
+    - Right-Left (RL)
+
+    10
+      20 (-1) balanceFactor(root.rightChild) < 0
+        30
+    leftRotate(10)
+
+    10
+      30 (1) balanceFactor(root.rightChild) > 0
+    20
+    rightRotate(30)
+    leftRotate(10)
+
+        30
+      20 (1) balanceFactor(root.leftChild) > 0
+    10
+    rightRotate(30)
+
+        30
+      10 (-1) balanceFactor(root.leftChild) < 0
+        20
+    leftRotate(10)
+    rightRotate(30)
+
+
+
+    10 root
+      20 newRoot
+        30
+    leftRotate(10)
+      20
+    10  30
+    newRoot = root.rightChild
+    newRoot.leftChild = root
+
+    10
+      20
+    15  30
+    leftRotate(10)
+       20
+    10    30
+      15
+    (15 is rightChild of 10)
+    newRoot = root.rightChild
+    root.rightChild = newRoot.leftChild
+    newRoot.leftChild = root
+    reset height of root/newRoot
+    change return type of balance method to an AVLNode
+
+
+        30
+      20
+    10
+    newRoot = root.leftChild
+    newRoot.rightChild = root
+
+        30
+      20
+    10  15
+    newRoot = root.leftChild
+    root.leftChild = newRoot.rightChild
+    newRoot.rightChild = root

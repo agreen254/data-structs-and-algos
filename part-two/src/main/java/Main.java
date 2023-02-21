@@ -1,4 +1,5 @@
 import binaryTrees.BinTreeSolution;
+import avlTrees.AVLTree;
 
 import java.util.ArrayList;
 
@@ -82,5 +83,19 @@ public class Main {
 
         System.out.println("Get Ancestors");
         System.out.println(tree.getAncestors(6));
+
+        System.out.println("AVL Trees");
+        var avl = new AVLTree();
+        avl.insertMine(7);
+        avl.insertMine(4);
+        avl.insertMine(9);
+        avl.insertMine(1);
+        avl.insertMine(6);
+        avl.insertMine(8);
+        avl.insertMine(10);
+        var avlS = new AVLTree();
+        avlS.insert(10);
+        avlS.insert(30);
+        avlS.insert(20);
     }
 }
